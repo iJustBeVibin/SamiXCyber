@@ -30,9 +30,18 @@ SOURCIFY_API = os.getenv("SOURCIFY_API", "https://sourcify.dev/server")
 ETHERSCAN_EXPLORER = os.getenv("ETHERSCAN_EXPLORER", "https://etherscan.io")
 
 # API settings
-API_TIMEOUT = int(os.getenv("API_TIMEOUT", "4"))
+API_TIMEOUT = int(os.getenv("API_TIMEOUT", "10"))
 API_RETRIES = int(os.getenv("API_RETRIES", "2"))
 REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "0.1"))
+
+# Dashboard API configuration
+COINGECKO_API_KEY = os.getenv("COINGECKO_API_KEY", "")  # Optional, for higher rate limits
+COINGECKO_BASE_URL = os.getenv("COINGECKO_BASE_URL", "https://api.coingecko.com/api/v3")
+DEFILLAMA_BASE_URL = os.getenv("DEFILLAMA_BASE_URL", "https://api.llama.fi")
+
+# Cache settings
+CACHE_TTL_SECONDS = int(os.getenv("CACHE_TTL_SECONDS", "300"))  # 5 minutes
+DASHBOARD_REFRESH_INTERVAL = int(os.getenv("DASHBOARD_REFRESH_INTERVAL", "900"))  # 15 minutes
 
 # Version info
 PROTOTYPE_VERSION = "0.3-multichain-tech"

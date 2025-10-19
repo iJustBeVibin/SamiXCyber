@@ -1,0 +1,59 @@
+{
+  "protocols": [
+    {
+      "id": "aave-v3",
+      "name": "Aave V3",
+      "chain": "ethereum",
+      "network": "mainnet",
+      "contract_address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+      "coingecko_id": "aave",
+      "defillama_slug": "aave-v3",
+      "description": "Decentralized lending and borrowing protocol",
+      "category": "Lending"
+    },
+    {
+      "id": "uniswap-v3",
+      "name": "Uniswap V3",
+      "chain": "ethereum",
+      "network": "mainnet",
+      "contract_address": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+      "coingecko_id": "uniswap",
+      "defillama_slug": "uniswap-v3",
+      "description": "Decentralized exchange with concentrated liquidity",
+      "category": "DEX"
+    },
+    {
+      "id": "compound-v3",
+      "name": "Compound V3",
+      "chain": "ethereum",
+      "network": "mainnet",
+      "contract_address": "0xc3d688B66703497DAA19211EEdff47f25384cdc3",
+      "coingecko_id": "compound-governance-token",
+      "defillama_slug": "compound-v3",
+      "description": "Algorithmic money market protocol",
+      "category": "Lending"
+    },
+    {
+      "id": "makerdao",
+      "name": "MakerDAO",
+      "chain": "ethereum",
+      "network": "mainnet",
+      "contract_address": "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2",
+      "coingecko_id": "maker",
+      "defillama_slug": "makerdao",
+      "description": "Decentralized stablecoin protocol",
+      "category": "CDP"
+    },
+    {
+      "id": "curve",
+      "name": "Curve Finance",
+      "chain": "ethereum",
+      "network": "mainnet",
+      "contract_address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+      "coingecko_id": "curve-dao-token",
+      "defillama_slug": "curve-dex",
+      "description": "Stablecoin-focused decentralized exchange",
+      "category": "DEX"
+    }
+  ]
+}

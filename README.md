@@ -12,6 +12,7 @@ A production-ready system for evaluating the technical risk of smart contracts a
 - 🧪 **Comprehensive Tests**: Automated test suite with pytest
 - 🎨 **Interactive UI**: Streamlit web interface for easy analysis
 - 📄 **JSON Receipts**: Exportable analysis reports for auditing
+- 🛡️ **Risk Dashboard**: Multi-protocol risk assessment dashboard with comprehensive analytics
 
 ## 🚀 Quick Start
 
@@ -49,7 +50,11 @@ A production-ready system for evaluating the technical risk of smart contracts a
 
 5. **Launch the Streamlit app**:
    ```bash
+   # Single protocol analysis
    streamlit run app.py
+   
+   # Risk Dashboard (multi-protocol)
+   streamlit run dashboard_app.py
    ```
 
 ## 🏗️ Architecture
@@ -129,7 +134,8 @@ The technical risk score (10-95, higher = safer) is calculated as:
 ## 📁 Project Structure
 
 ```
-├── app.py                    # Streamlit web interface
+├── app.py                    # Streamlit web interface (single protocol)
+├── dashboard_app.py          # Risk Dashboard (multi-protocol)
 ├── config.py                 # Configuration and safety checks
 ├── adapters/                 # Chain-specific adapters
 │   ├── ethereum.py          # Ethereum/Etherscan integration
@@ -138,7 +144,20 @@ The technical risk score (10-95, higher = safer) is calculated as:
 │   └── tech.py              # Unified technical features
 ├── engine/                   # Scoring engines
 │   ├── tech_baseline.py     # Technical risk algorithm
+│   ├── risk_aggregator.py   # Multi-dimensional risk scoring
 │   └── combine.py           # Future: combined scoring
+├── api_clients/              # External API integrations
+│   ├── base.py              # Base API client with caching
+│   ├── coingecko.py         # CoinGecko market data
+│   └── defillama.py         # DeFi Llama TVL data
+├── dashboard/                # Dashboard components
+│   ├── protocol_manager.py  # Protocol data management
+│   ├── protocols.json       # Protocol configurations
+│   └── components/          # UI components
+│       ├── protocol_card.py # Protocol summary cards
+│       ├── risk_radar.py    # Radar chart visualization
+│       ├── detail_view.py   # Protocol detail view
+│       └── methodology.py   # Methodology explanation
 ├── utils/                    # Utilities
 │   └── io.py                # JSON receipt generation
 ├── tests/                    # Automated test suite
@@ -173,8 +192,88 @@ flake8 .
 3. Add tests in `tests/test_new_chain.py`
 4. Update `app.py` to include new chain option
 
+## 🛡️ Risk Dashboard
+
+The Risk Dashboard provides comprehensive risk assessments for multiple DeFi protocols simultaneously, aggregating data from various sources to calculate multi-dimensional risk scores.
+
+### Features
+
+- **Multi-Protocol Analysis**: View risk assessments for 5 major Ethereum DeFi protocols
+- **Multi-Dimensional Scoring**: Security (40%), Financial (30%), Operational (20%), Market (10%)
+- **Interactive Visualizations**: Radar charts showing risk breakdown across categories
+- **Real-Time Data**: Aggregates data from Etherscan, CoinGecko, and DeFi Llama
+- **Traffic Light Indicators**: Quick visual risk assessment (🟢 Low, 🟡 Medium, 🔴 High)
+- **Detailed Explanations**: Plain language reasons for each risk score
+- **Data Freshness**: Displays data age and cache status for transparency
+
+### Running the Dashboard
+
+```bash
+streamlit run dashboard_app.py
+```
+
+### Supported Protocols (MVP)
+
+1. **Aave V3** - Lending protocol
+2. **Uniswap V3** - Decentralized exchange
+3. **Compound V3** - Lending protocol
+4. **MakerDAO** - Stablecoin protocol
+5. **Curve Finance** - Stableswap DEX
+
+### Configuration
+
+Protocol configurations are stored in `dashboard/protocols.json`. Each protocol requires:
+
+```json
+{
+  "protocol_id": "aave-v3",
+  "name": "Aave V3",
+  "chain": "ethereum",
+  "network": "mainnet",
+  "contract_address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "category": "lending",
+  "coingecko_id": "aave",
+  "defillama_slug": "aave-v3"
+}
+```
+
+### Environment Variables
+
+```bash
+# Optional: CoinGecko API key for higher rate limits
+COINGECKO_API_KEY=your_key_here
+
+# API base URLs (defaults provided)
+COINGECKO_BASE_URL=https://api.coingecko.com/api/v3
+DEFILLAMA_BASE_URL=https://api.llama.fi
+
+# Cache settings
+CACHE_TTL_SECONDS=300              # 5 minutes
+DASHBOARD_REFRESH_INTERVAL=900     # 15 minutes
+```
+
+### Methodology
+
+The dashboard uses a weighted scoring formula:
+
+```
+Overall Score = 0.40 × Security + 0.30 × Financial + 0.20 × Operational + 0.10 × Market
+```
+
+**Risk Levels:**
+- 🟢 **Low Risk (70-100)**: Strong security, stable financials, good operations
+- 🟡 **Medium Risk (40-69)**: Some concerns, proceed with caution
+- 🔴 **High Risk (0-39)**: Significant risks, exercise extreme caution
+
+For detailed methodology, see the "Methodology" page in the dashboard.
+
 ## 📋 Recent Updates
 
+- ✅ Added Risk Dashboard with multi-protocol analysis
+- ✅ Implemented multi-dimensional risk scoring engine
+- ✅ Integrated CoinGecko and DeFi Llama APIs
+- ✅ Created interactive radar chart visualizations
+- ✅ Added comprehensive error handling and caching
 - ✅ Migrated to Etherscan API V2
 - ✅ Fixed proxy contract detection
 - ✅ Improved error handling for 404s
@@ -184,12 +283,26 @@ flake8 .
 
 ## 🔮 Roadmap
 
-- [ ] Market risk scoring integration
+### Phase 1 (Completed - MVP)
+- ✅ Multi-protocol risk dashboard
+- ✅ Multi-dimensional risk scoring
+- ✅ Market data integration (CoinGecko, DeFi Llama)
+- ✅ Interactive visualizations
+
+### Phase 2 (Planned)
+- [ ] Historical risk tracking and trends
+- [ ] Alert system for risk changes
+- [ ] Portfolio view (aggregate risk across protocols)
+- [ ] Security audit data integration
+- [ ] Hedera protocol support
+- [ ] Custom risk thresholds
+
+### Phase 3 (Future)
 - [ ] AI/ML model integration
-- [ ] Combined risk scoring (tech + market)
-- [ ] Enhanced dashboard with charts
+- [ ] Comparative protocol analysis
 - [ ] API endpoint for programmatic access
 - [ ] Support for more chains (Polygon, BSC, etc.)
+- [ ] Export functionality (PDF/CSV reports)
 
 ## 🤝 Contributing
 
